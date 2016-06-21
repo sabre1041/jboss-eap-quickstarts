@@ -30,7 +30,7 @@ parameters:
 - name: "SERVICE_URL"
   displayName: "Service URL"
   description: ""
-  value: "" 
+  value: ""
 objects:
 - kind: Service
   apiVersion: v1
@@ -38,7 +38,7 @@ objects:
     name: "${APP_NAME}"
     labels:
       application: "${APP_NAME}"
-    annotations: 
+    annotations:
       description: "The web server's http port."
   spec:
     ports:
@@ -52,7 +52,7 @@ objects:
     name: "${APP_NAME}"
     labels:
       application: "${APP_NAME}"
-    annotations: 
+    annotations:
       description: "Route for application's http service."
   spec:
     host: "${SERVICE_URL}"
@@ -67,7 +67,7 @@ objects:
     labels:
       application: "${APP_NAME}"
   spec:
-    strategy: 
+    strategy:
       type: Recreate
     triggers:
     - type: ConfigChange
@@ -136,4 +136,3 @@ objects:
             value: "${HORNETQ_TOPICS}"
           - name: JGROUPS_CLUSTER_PASSWORD
             value: "${JGROUPS_CLUSTER_PASSWORD}"
-  
