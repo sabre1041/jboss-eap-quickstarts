@@ -10,6 +10,20 @@ parameters:
   description: ""
   value: ""
 objects:
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: "${APP_NAME}"
+    labels:
+      application: "${APP_NAME}"
+    annotations:
+      description: "The web server's http port."
+  spec:
+    ports:
+    - port: 8080
+      targetPort: 8080
+    selector:
+      deploymentConfig: "${APP_NAME}"
 - kind: Route
   apiVersion: v1
   metadata:
