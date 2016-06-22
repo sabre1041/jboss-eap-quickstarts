@@ -11,6 +11,7 @@ node('redhatdistortion-maven') {
     stage 'Checkout SCM'
     checkout scm
 
+    stage 'Openshift login'
     sh "oc login https://kubernetes.default/ --token=${k8s_token} --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 //  Prepare the deployments so you can see pipeline in console overview when running for the first time
     sh 'oc process -f helloworld/.openshift-ci_cd/empty-deployment-template.yaml -v "APP_NAME=helloworld-dev" | oc apply -f -'
@@ -28,8 +29,6 @@ node('redhatdistortion-maven') {
 
     stage 'Archive artifact'
     archive 'helloworld/target/*.war'
-
-    stage 'Openshift login'
 
     stage 'Create Image'
     sh 'oc delete bc helloworld || true'  // Bugfix for https://github.com/openshift/origin/issues/9301

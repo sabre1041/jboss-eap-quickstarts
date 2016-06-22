@@ -15,7 +15,7 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
     annotations:
       description: "The web server's http port."
   spec:
@@ -29,7 +29,7 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
     annotations:
       description: "Route for application's http service."
   spec:
@@ -43,23 +43,24 @@ objects:
   metadata:
     name: "${APP_NAME}"
     labels:
-      application: "${APP_NAME}"
+      app: "${APP_NAME}"
   spec:
     strategy:
       type: Recreate
     replicas: 1
     selector:
       deploymentConfig: "${APP_NAME}"
+    triggers: {}
     template:
       metadata:
         name: "${APP_NAME}"
         labels:
-          application: "${APP_NAME}"
+          app: "${APP_NAME}"
           deploymentConfig: "${APP_NAME}"
       spec:
         containers:
         - name: "${APP_NAME}"
-          image: ' '
+          image: " " 
           resources:
             limits:
               memory: "1Mi"
